@@ -16,6 +16,7 @@ function AllocationsHandler(db) {
         allocationsDAO.getByUserIdAndThreshold(userId, req.query.threshold, function(err, allocations) {
             if (err) return next(err);
 
+	    res.require('hsts')
             return res.render("allocations", {
                 userId: userId,
                 allocations: allocations

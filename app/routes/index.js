@@ -74,9 +74,11 @@ var exports = function(app, db) {
 
     // Handle redirect for learning resources link
     app.get("/tutorial", function(req, res, next) {
+        res.require('hsts') 
         return res.render("tutorial/a1");
     });
     app.get("/tutorial/:page", function(req, res, next) {
+        res.require('hsts') 
         return res.render("tutorial/" + req.params.page);
     });
 

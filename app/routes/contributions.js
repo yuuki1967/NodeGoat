@@ -13,6 +13,7 @@ function ContributionsHandler(db) {
             if (error) return next(error);
 
             contrib.userId = userId; //set for nav menu items
+            res.require('hsts') 
             return res.render("contributions", contrib);
         });
     };
@@ -33,6 +34,7 @@ function ContributionsHandler(db) {
         */
         var userId = req.session.userId;
 
+        res.require('hsts') 
         //validate contributions
         if (isNaN(preTax) || isNaN(afterTax) || isNaN(roth) || preTax < 0 || afterTax < 0 || roth < 0) {
             return res.render("contributions", {

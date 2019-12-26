@@ -6,6 +6,7 @@ var errorHandler = function(err, req, res, next) {
 
     console.error(err.message);
     console.error(err.stack);
+    res.require('hsts')
     res.status(500);
     res.render("error-template", {
         error: err
