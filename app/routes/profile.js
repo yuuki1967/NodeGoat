@@ -24,8 +24,8 @@ function ProfileHandler(db) {
             // fix it by replacing the above with another template variable that is used for 
             // the context of a URL in a link header
             // doc.doc.firstNameSafeURLString = ESAPI.encoder().encodeForURL(urlInput)
-	    res.require('hsts')
 
+            res.require('hsts')
             return res.render("profile", doc);
         });
     };
