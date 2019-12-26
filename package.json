@@ -27,6 +27,7 @@
   },
   "scripts": {
     "start": "node server.js",
+    "scan" : "node node_modules/nodeJS-Agent/iast.js server.js",
     "test:e2e": "NODE_ENV=test cypress open",
     "test:ci": "NODE_ENV=test cypress run",
     "test": "node node_modules/grunt-cli/bin/grunt test",

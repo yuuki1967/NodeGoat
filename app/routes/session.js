@@ -44,6 +44,7 @@ function SessionHandler(db) {
     };
 
     this.displayLoginPage = function(req, res, next) {
+	res.require('hsts')
         return res.render("login", {
             userName: "",
             password: "",
