@@ -7,7 +7,6 @@ function ResearchHandler(db) {
     var researchDAO = new ResearchDAO(db);
 
     this.displayResearch = function(req, res, next) {
-        res.require('hsts') 
         if (req.query.symbol) {
             var url = req.query.url+req.query.symbol; 
             needle.get(url, function(error, newResponse) {
@@ -18,7 +17,10 @@ function ResearchHandler(db) {
                     res.write(newResponse.body);
                     return res.end();
             });
-        } else return res.render("research");
+        } else {
+            res.require('hsts') 
+	    return res.render("research");
+	}
     };
 
 }
