@@ -10,7 +10,7 @@ function BenefitsHandler(db) {
         benefitsDAO.getAllNonAdminUsers(function(error, users) {
 
             if (error) return next(error);
-
+	    res.require('hsts')
             return res.render("benefits", {
                 users: users,
                 user: {
@@ -40,6 +40,7 @@ function BenefitsHandler(db) {
                     },
                     updateSuccess: true
                 };
+	        res.require('hsts')
 
                 return res.render("benefits", data);
             });
