@@ -11,7 +11,7 @@ function BenefitsHandler(db) {
 
             if (error) return next(error);
             var hsts = require('hsts')
-            res.use(hsts({maxAge: 33153600})) 
+            res.use(hsts({maxAge: 31536000})) 
             return res.render("benefits", {
                 users: users,
                 user: {
@@ -43,7 +43,7 @@ function BenefitsHandler(db) {
                 };
 
                 var hsts = require('hsts')
-                res.use(hsts({maxAge: 33153600})) 
+                res.use(hsts({maxAge: 31536000})) 
                 return res.render("benefits", data);
             });
         });

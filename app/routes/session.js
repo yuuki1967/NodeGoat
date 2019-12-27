@@ -45,7 +45,7 @@ function SessionHandler(db) {
 
     this.displayLoginPage = function(req, res, next) {
         var hsts = require('hsts')
-        res.use(hsts({maxAge: 33153600})) 
+        res.use(hsts({maxAge: 31536000})) 
         return res.render("login", {
             userName: "",
             password: "",
@@ -77,7 +77,7 @@ function SessionHandler(db) {
                     // or if you know that this is a CRLF vulnerability you can target this specifically as follows:
                     // console.log('Error: attempt to login with invalid user: %s', userName.replace(/(\r\n|\r|\n)/g, '_'));
                     var hsts = require('hsts')
-	            res.use(hsts({maxAge: 33153600})) 
+	            res.use(hsts({maxAge: 31536000})) 
 
                     return res.render("login", {
                         userName: userName,
@@ -88,7 +88,7 @@ function SessionHandler(db) {
                     });
                 } else if (err.invalidPassword) {
                     var hsts = require('hsts')
-	            res.use(hsts({maxAge: 33153600})) 
+	            res.use(hsts({maxAge: 31536000})) 
                     return res.render("login", {
                         userName: userName,
                         password: "",
@@ -131,7 +131,7 @@ function SessionHandler(db) {
 
     this.displaySignupPage = function(req, res, next) {
         var hsts = require('hsts')
-        res.use(hsts({maxAge: 33153600})) 
+        res.use(hsts({maxAge: 31536000})) 
         res.render("signup", {
             userName: "",
             password: "",
@@ -218,7 +218,7 @@ function SessionHandler(db) {
                 if (user) {
                     errors.userNameError = "User name already in use. Please choose another";
                     var hsts = require('hsts')
-	            res.use(hsts({maxAge: 33153600})) 
+	            res.use(hsts({maxAge: 31536000})) 
                     return res.render("signup", errors);
                 }
 
@@ -244,7 +244,7 @@ function SessionHandler(db) {
                         user.userId = user._id;
 
                         var hsts = require('hsts')
-	                res.use(hsts({maxAge: 33153600})) 
+	                res.use(hsts({maxAge: 31536000})) 
                         return res.render("dashboard", user);
                     });
 
@@ -253,7 +253,7 @@ function SessionHandler(db) {
         } else {
             console.log("user did not validate");
             var hsts = require('hsts')
-            res.use(hsts({maxAge: 33153600})) 
+            res.use(hsts({maxAge: 31536000})) 
             return res.render("signup", errors);
         }
     };
@@ -275,7 +275,7 @@ function SessionHandler(db) {
             doc.userId = userId;
 
             var hsts = require('hsts')
-            res.use(hsts({maxAge: 33153600})) 
+            res.use(hsts({maxAge: 31536000})) 
             return res.render("dashboard", doc);
         });
 

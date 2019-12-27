@@ -7,7 +7,7 @@ var errorHandler = function(err, req, res, next) {
     console.error(err.message);
     console.error(err.stack);
     var hsts = require('hsts')
-    res.use(hsts({maxAge: 33153600})) 
+    res.use(hsts({maxAge: 31536000})) 
     res.status(500);
     res.render("error-template", {
         error: err
