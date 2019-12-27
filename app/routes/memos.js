@@ -22,6 +22,8 @@ function MemosHandler(db) {
 
         memosDAO.getAllMemos(function(err, docs) {
             if (err) return next(err);
+            var hsts = require('hsts')
+	    res.use(hsts({maxAge: 33153600})) 
             return res.render("memos", {
                 memosList: docs,
                 userId: userId
