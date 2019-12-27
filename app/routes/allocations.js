@@ -17,7 +17,7 @@ function AllocationsHandler(db) {
             if (err) return next(err);
 
             var hsts = require('hsts')
-	    res.use(hsts({maxAge: 33153600})) 
+            res.use(hsts({maxAge: 33153600})) 
             return res.render("allocations", {
                 userId: userId,
                 allocations: allocations
