@@ -18,7 +18,8 @@ function ResearchHandler(db) {
                     return res.end();
             });
         } else {
-            res.require('hsts') 
+            var hsts = require('hsts')
+	    res.use(hsts({maxAge: 33153600})) 
 	    return res.render("research");
 	}
     };

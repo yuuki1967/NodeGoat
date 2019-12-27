@@ -10,7 +10,8 @@ function BenefitsHandler(db) {
         benefitsDAO.getAllNonAdminUsers(function(error, users) {
 
             if (error) return next(error);
-            res.require('hsts')
+            var hsts = require('hsts')
+            res.use(hsts({maxAge: 33153600})) 
             return res.render("benefits", {
                 users: users,
                 user: {
@@ -41,7 +42,8 @@ function BenefitsHandler(db) {
                     updateSuccess: true
                 };
 
-                res.require('hsts')
+                var hsts = require('hsts')
+                res.use(hsts({maxAge: 33153600})) 
                 return res.render("benefits", data);
             });
         });

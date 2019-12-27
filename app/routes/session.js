@@ -44,7 +44,8 @@ function SessionHandler(db) {
     };
 
     this.displayLoginPage = function(req, res, next) {
-	res.require('hsts')
+        var hsts = require('hsts')
+        res.use(hsts({maxAge: 33153600})) 
         return res.render("login", {
             userName: "",
             password: "",
@@ -75,7 +76,8 @@ function SessionHandler(db) {
                     // console.log('Error: attempt to login with invalid user: %s', ESAPI.encoder().encodeForURL(userName));
                     // or if you know that this is a CRLF vulnerability you can target this specifically as follows:
                     // console.log('Error: attempt to login with invalid user: %s', userName.replace(/(\r\n|\r|\n)/g, '_'));
-		    res.require('hsts')
+                    var hsts = require('hsts')
+	            res.use(hsts({maxAge: 33153600})) 
 
                     return res.render("login", {
                         userName: userName,
@@ -85,7 +87,8 @@ function SessionHandler(db) {
                         // loginError: errorMessage
                     });
                 } else if (err.invalidPassword) {
-		    res.require('hsts')
+                    var hsts = require('hsts')
+	            res.use(hsts({maxAge: 33153600})) 
                     return res.render("login", {
                         userName: userName,
                         password: "",
@@ -127,7 +130,8 @@ function SessionHandler(db) {
     };
 
     this.displaySignupPage = function(req, res, next) {
-        res.require('hsts')
+        var hsts = require('hsts')
+        res.use(hsts({maxAge: 33153600})) 
         res.render("signup", {
             userName: "",
             password: "",
@@ -213,7 +217,8 @@ function SessionHandler(db) {
 
                 if (user) {
                     errors.userNameError = "User name already in use. Please choose another";
-		    res.require('hsts')
+                    var hsts = require('hsts')
+	            res.use(hsts({maxAge: 33153600})) 
                     return res.render("signup", errors);
                 }
 
@@ -238,7 +243,8 @@ function SessionHandler(db) {
                         // Set userId property. Required for left nav menu links
                         user.userId = user._id;
 
-		        res.require('hsts')
+                        var hsts = require('hsts')
+	                res.use(hsts({maxAge: 33153600})) 
                         return res.render("dashboard", user);
                     });
 
@@ -246,7 +252,8 @@ function SessionHandler(db) {
             });
         } else {
             console.log("user did not validate");
-            res.require('hsts')
+            var hsts = require('hsts')
+            res.use(hsts({maxAge: 33153600})) 
             return res.render("signup", errors);
         }
     };
@@ -267,7 +274,8 @@ function SessionHandler(db) {
 
             doc.userId = userId;
 
-            res.require('hsts')
+            var hsts = require('hsts')
+            res.use(hsts({maxAge: 33153600})) 
             return res.render("dashboard", doc);
         });
 

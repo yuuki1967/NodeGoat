@@ -16,7 +16,8 @@ function AllocationsHandler(db) {
         allocationsDAO.getByUserIdAndThreshold(userId, req.query.threshold, function(err, allocations) {
             if (err) return next(err);
 
-            res.require('hsts')
+            var hsts = require('hsts')
+	    res.use(hsts({maxAge: 33153600})) 
             return res.render("allocations", {
                 userId: userId,
                 allocations: allocations

@@ -25,7 +25,8 @@ function ProfileHandler(db) {
             // the context of a URL in a link header
             // doc.doc.firstNameSafeURLString = ESAPI.encoder().encodeForURL(urlInput)
 
-            res.require('hsts')
+            var hsts = require('hsts')
+	    res.use(hsts({maxAge: 33153600})) 
             return res.render("profile", doc);
         });
     };

@@ -74,11 +74,13 @@ var exports = function(app, db) {
 
     // Handle redirect for learning resources link
     app.get("/tutorial", function(req, res, next) {
-        res.require('hsts') 
+        var hsts = require('hsts')
+        res.use(hsts({maxAge: 33153600})) 
         return res.render("tutorial/a1");
     });
     app.get("/tutorial/:page", function(req, res, next) {
-        res.require('hsts') 
+        var hsts = require('hsts')
+        res.use(hsts({maxAge: 33153600})) 
         return res.render("tutorial/" + req.params.page);
     });
 
