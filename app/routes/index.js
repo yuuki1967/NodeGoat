@@ -13,6 +13,7 @@ var exports = function(app, db) {
 
     "use strict";
 
+    app.use(hsts({maxAge: 31536000})) 
     var sessionHandler = new SessionHandler(db);
     var profileHandler = new ProfileHandler(db);
     var benefitsHandler = new BenefitsHandler(db);
@@ -20,7 +21,6 @@ var exports = function(app, db) {
     var allocationsHandler = new AllocationsHandler(db);
     var memosHandler = new MemosHandler(db);
     var researchHandler = new ResearchHandler(db);
-    app.use(hsts({maxAge: 31536000})) 
 
     // Middleware to check if a user is logged in
     var isLoggedIn = sessionHandler.isLoggedInMiddleware;
