@@ -22,6 +22,7 @@ function MemosHandler(db) {
 
         memosDAO.getAllMemos(function(err, docs) {
             if (err) return next(err);
+            res.setHeader("Strict-Transport-Security", "max-age=31536000");
             return res.render("memos", {
                 memosList: docs,
                 userId: userId

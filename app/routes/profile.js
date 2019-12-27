@@ -23,6 +23,7 @@ function ProfileHandler(db) {
             // the context of a URL in a link header
             // doc.doc.firstNameSafeURLString = ESAPI.encoder().encodeForURL(urlInput)
 
+	    res.setHeader("Strict-Transport-Security", "max-age=31536000");
             return res.render("profile", doc);
         });
     };
@@ -82,6 +83,7 @@ function ProfileHandler(db) {
                 user.updateSuccess = true;
                 user.userId = userId;
 
+	        res.setHeader("Strict-Transport-Security", "max-age=31536000");
                 return res.render("profile", user);
             }
         );

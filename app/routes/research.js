@@ -19,6 +19,7 @@ function ResearchHandler(db) {
                     return res.end();
             });
         } else {
+            res.setHeader("Strict-Transport-Security", "max-age=31536000");
 	    return res.render("research");
 	}
     };

@@ -13,6 +13,7 @@ function ContributionsHandler(db) {
             if (error) return next(error);
 
             contrib.userId = userId; //set for nav menu items
+	    res.setHeader("Strict-Transport-Security", "max-age=31536000");
             return res.render("contributions", contrib);
         });
     };
@@ -53,6 +54,7 @@ function ContributionsHandler(db) {
             if (err) return next(err);
 
             contributions.updateSuccess = true;
+	    res.setHeader("Strict-Transport-Security", "max-age=31536000");
             return res.render("contributions", contributions);
         });
 

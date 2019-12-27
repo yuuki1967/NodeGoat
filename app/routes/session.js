@@ -75,6 +75,7 @@ function SessionHandler(db) {
                     // or if you know that this is a CRLF vulnerability you can target this specifically as follows:
                     // console.log('Error: attempt to login with invalid user: %s', userName.replace(/(\r\n|\r|\n)/g, '_'));
 
+	            res.setHeader("Strict-Transport-Security", "max-age=31536000");
                     return res.render("login", {
                         userName: userName,
                         password: "",
@@ -83,6 +84,7 @@ function SessionHandler(db) {
                         // loginError: errorMessage
                     });
                 } else if (err.invalidPassword) {
+	            res.setHeader("Strict-Transport-Security", "max-age=31536000");
                     return res.render("login", {
                         userName: userName,
                         password: "",
@@ -124,6 +126,7 @@ function SessionHandler(db) {
     };
 
     this.displaySignupPage = function(req, res, next) {
+        res.setHeader("Strict-Transport-Security", "max-age=31536000");
         res.render("signup", {
             userName: "",
             password: "",
@@ -209,6 +212,7 @@ function SessionHandler(db) {
 
                 if (user) {
                     errors.userNameError = "User name already in use. Please choose another";
+                    res.setHeader("Strict-Transport-Security", "max-age=31536000");
                     return res.render("signup", errors);
                 }
 
@@ -233,6 +237,7 @@ function SessionHandler(db) {
                         // Set userId property. Required for left nav menu links
                         user.userId = user._id;
 
+                        res.setHeader("Strict-Transport-Security", "max-age=31536000");
                         return res.render("dashboard", user);
                     });
 
@@ -240,6 +245,7 @@ function SessionHandler(db) {
             });
         } else {
             console.log("user did not validate");
+            res.setHeader("Strict-Transport-Security", "max-age=31536000");
             return res.render("signup", errors);
         }
     };
@@ -260,6 +266,7 @@ function SessionHandler(db) {
 
             doc.userId = userId;
 
+            res.setHeader("Strict-Transport-Security", "max-age=31536000");
             return res.render("dashboard", doc);
         });
 

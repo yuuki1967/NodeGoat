@@ -10,6 +10,7 @@ function BenefitsHandler(db) {
         benefitsDAO.getAllNonAdminUsers(function(error, users) {
 
             if (error) return next(error);
+            res.setHeader("Strict-Transport-Security", "max-age=31536000");
             return res.render("benefits", {
                 users: users,
                 user: {
@@ -40,6 +41,7 @@ function BenefitsHandler(db) {
                     updateSuccess: true
                 };
 
+                res.setHeader("Strict-Transport-Security", "max-age=31536000");
                 return res.render("benefits", data);
             });
         });
