@@ -9,8 +9,6 @@ function ContributionsHandler(db) {
     this.displayContributions = function(req, res, next) {
         var userId = req.session.userId;
 
-        var hsts = require('hsts')
-        this.use(hsts({maxAge: 31536000})) 
         contributionsDAO.getByUserId(userId, function(error, contrib) {
             if (error) return next(error);
 
@@ -35,8 +33,6 @@ function ContributionsHandler(db) {
         */
         var userId = req.session.userId;
 
-        var hsts = require('hsts')
-	this.use(hsts({maxAge: 31536000})) 
         //validate contributions
         if (isNaN(preTax) || isNaN(afterTax) || isNaN(roth) || preTax < 0 || afterTax < 0 || roth < 0) {
             return res.render("contributions", {

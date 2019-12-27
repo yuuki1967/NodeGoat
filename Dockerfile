@@ -13,7 +13,7 @@ RUN apk add --no-cache --virtual .gpy \
 	python \
 	make \
 	g++ 
-RUN npm install http://192.168.0.15:8380/iast/compilation/download/NODE_JS
+RUN npm install http://192.168.15.211:8380/iast/compilation/download/NODE_JS
 RUN chown $USER:$USER $WORKDIR
 COPY --chown=node . $WORKDIR
 # In production environment uncomment the next line

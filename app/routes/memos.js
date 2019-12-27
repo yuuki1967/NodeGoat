@@ -19,8 +19,6 @@ function MemosHandler(db) {
     this.displayMemos = function(req, res, next) {
 
         var userId = req.session.userId;
-        var hsts = require('hsts')
-        this.use(hsts({maxAge: 31536000})) 
 
         memosDAO.getAllMemos(function(err, docs) {
             if (err) return next(err);

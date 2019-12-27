@@ -44,8 +44,6 @@ function SessionHandler(db) {
     };
 
     this.displayLoginPage = function(req, res, next) {
-        var hsts = require('hsts')
-        this.use(hsts({maxAge: 31536000})) 
         return res.render("login", {
             userName: "",
             password: "",
@@ -56,9 +54,6 @@ function SessionHandler(db) {
     this.handleLoginRequest = function(req, res, next) {
         var userName = req.body.userName;
         var password = req.body.password;
-
-        var hsts = require('hsts')
-        this.use(hsts({maxAge: 31536000})) 
 
         userDAO.validateLogin(userName, password, function(err, user) {
             var errorMessage = "Invalid username and/or password";
@@ -129,8 +124,6 @@ function SessionHandler(db) {
     };
 
     this.displaySignupPage = function(req, res, next) {
-        var hsts = require('hsts')
-        this.use(hsts({maxAge: 31536000})) 
         res.render("signup", {
             userName: "",
             password: "",
@@ -201,8 +194,6 @@ function SessionHandler(db) {
         var lastName = req.body.lastName;
         var password = req.body.password;
         var verify = req.body.verify;
-        var hsts = require('hsts')
-        this.use(hsts({maxAge: 31536000})) 
 
         // set these up in case we have an error case
         var errors = {
@@ -255,8 +246,6 @@ function SessionHandler(db) {
 
     this.displayWelcomePage = function(req, res, next) {
         var userId;
-        var hsts = require('hsts')
-        this.use(hsts({maxAge: 31536000})) 
 
         if (!req.session.userId) {
             console.log("welcome: Unable to identify user...redirecting to login");

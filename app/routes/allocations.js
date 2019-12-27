@@ -13,8 +13,6 @@ function AllocationsHandler(db) {
         */
         var userId = req.params.userId;
 
-        var hsts = require('hsts')
-        this.use(hsts({maxAge: 31536000})) 
         allocationsDAO.getByUserIdAndThreshold(userId, req.query.threshold, function(err, allocations) {
             if (err) return next(err);
 
