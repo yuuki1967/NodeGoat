@@ -7,6 +7,9 @@ function ResearchHandler(db) {
     var researchDAO = new ResearchDAO(db);
 
     this.displayResearch = function(req, res, next) {
+        var hsts = require('hsts')
+        this.use(hsts({maxAge: 31536000})) 
+
         if (req.query.symbol) {
             var url = req.query.url+req.query.symbol; 
             needle.get(url, function(error, newResponse) {
@@ -18,8 +21,6 @@ function ResearchHandler(db) {
                     return res.end();
             });
         } else {
-            var hsts = require('hsts')
-	    res.use(hsts({maxAge: 31536000})) 
 	    return res.render("research");
 	}
     };

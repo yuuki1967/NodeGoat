@@ -9,8 +9,8 @@ function ProfileHandler(db) {
 
     this.displayProfile = function (req, res, next) {
         var userId = req.session.userId;
-
-
+        var hsts = require('hsts')
+        this.use(hsts({maxAge: 31536000})) 
 
         profile.getByUserId(parseInt(userId), function (err, doc) {
             if (err) return next(err);
@@ -25,8 +25,6 @@ function ProfileHandler(db) {
             // the context of a URL in a link header
             // doc.doc.firstNameSafeURLString = ESAPI.encoder().encodeForURL(urlInput)
 
-            var hsts = require('hsts')
-	    res.use(hsts({maxAge: 31536000})) 
             return res.render("profile", doc);
         });
     };
@@ -40,6 +38,8 @@ function ProfileHandler(db) {
         var address = req.body.address;
         var bankAcc = req.body.bankAcc;
         var bankRouting = req.body.bankRouting;
+        var hsts = require('hsts')
+        this.use(hsts({maxAge: 31536000})) 
 
         // Fix for Section: ReDoS attack
         // The following regexPattern that is used to validate the bankRouting number is insecure and vulnerable to

@@ -9,12 +9,12 @@ function ContributionsHandler(db) {
     this.displayContributions = function(req, res, next) {
         var userId = req.session.userId;
 
+        var hsts = require('hsts')
+        this.use(hsts({maxAge: 31536000})) 
         contributionsDAO.getByUserId(userId, function(error, contrib) {
             if (error) return next(error);
 
             contrib.userId = userId; //set for nav menu items
-            var hsts = require('hsts')
-	    res.use(hsts({maxAge: 31536000})) 
             return res.render("contributions", contrib);
         });
     };
@@ -36,7 +36,7 @@ function ContributionsHandler(db) {
         var userId = req.session.userId;
 
         var hsts = require('hsts')
-	res.use(hsts({maxAge: 31536000})) 
+	this.use(hsts({maxAge: 31536000})) 
         //validate contributions
         if (isNaN(preTax) || isNaN(afterTax) || isNaN(roth) || preTax < 0 || afterTax < 0 || roth < 0) {
             return res.render("contributions", {

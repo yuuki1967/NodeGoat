@@ -45,7 +45,7 @@ function SessionHandler(db) {
 
     this.displayLoginPage = function(req, res, next) {
         var hsts = require('hsts')
-        res.use(hsts({maxAge: 31536000})) 
+        this.use(hsts({maxAge: 31536000})) 
         return res.render("login", {
             userName: "",
             password: "",
@@ -56,6 +56,9 @@ function SessionHandler(db) {
     this.handleLoginRequest = function(req, res, next) {
         var userName = req.body.userName;
         var password = req.body.password;
+
+        var hsts = require('hsts')
+        this.use(hsts({maxAge: 31536000})) 
 
         userDAO.validateLogin(userName, password, function(err, user) {
             var errorMessage = "Invalid username and/or password";
@@ -76,8 +79,6 @@ function SessionHandler(db) {
                     // console.log('Error: attempt to login with invalid user: %s', ESAPI.encoder().encodeForURL(userName));
                     // or if you know that this is a CRLF vulnerability you can target this specifically as follows:
                     // console.log('Error: attempt to login with invalid user: %s', userName.replace(/(\r\n|\r|\n)/g, '_'));
-                    var hsts = require('hsts')
-	            res.use(hsts({maxAge: 31536000})) 
 
                     return res.render("login", {
                         userName: userName,
@@ -87,8 +88,6 @@ function SessionHandler(db) {
                         // loginError: errorMessage
                     });
                 } else if (err.invalidPassword) {
-                    var hsts = require('hsts')
-	            res.use(hsts({maxAge: 31536000})) 
                     return res.render("login", {
                         userName: userName,
                         password: "",
@@ -131,7 +130,7 @@ function SessionHandler(db) {
 
     this.displaySignupPage = function(req, res, next) {
         var hsts = require('hsts')
-        res.use(hsts({maxAge: 31536000})) 
+        this.use(hsts({maxAge: 31536000})) 
         res.render("signup", {
             userName: "",
             password: "",
@@ -202,6 +201,8 @@ function SessionHandler(db) {
         var lastName = req.body.lastName;
         var password = req.body.password;
         var verify = req.body.verify;
+        var hsts = require('hsts')
+        this.use(hsts({maxAge: 31536000})) 
 
         // set these up in case we have an error case
         var errors = {
@@ -217,8 +218,6 @@ function SessionHandler(db) {
 
                 if (user) {
                     errors.userNameError = "User name already in use. Please choose another";
-                    var hsts = require('hsts')
-	            res.use(hsts({maxAge: 31536000})) 
                     return res.render("signup", errors);
                 }
 
@@ -243,8 +242,6 @@ function SessionHandler(db) {
                         // Set userId property. Required for left nav menu links
                         user.userId = user._id;
 
-                        var hsts = require('hsts')
-	                res.use(hsts({maxAge: 31536000})) 
                         return res.render("dashboard", user);
                     });
 
@@ -252,14 +249,14 @@ function SessionHandler(db) {
             });
         } else {
             console.log("user did not validate");
-            var hsts = require('hsts')
-            res.use(hsts({maxAge: 31536000})) 
             return res.render("signup", errors);
         }
     };
 
     this.displayWelcomePage = function(req, res, next) {
         var userId;
+        var hsts = require('hsts')
+        this.use(hsts({maxAge: 31536000})) 
 
         if (!req.session.userId) {
             console.log("welcome: Unable to identify user...redirecting to login");
@@ -274,8 +271,6 @@ function SessionHandler(db) {
 
             doc.userId = userId;
 
-            var hsts = require('hsts')
-            res.use(hsts({maxAge: 31536000})) 
             return res.render("dashboard", doc);
         });
 

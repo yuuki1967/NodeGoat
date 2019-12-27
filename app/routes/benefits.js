@@ -7,11 +7,11 @@ function BenefitsHandler(db) {
 
     this.displayBenefits = function(req, res, next) {
 
+        var hsts = require('hsts')
+        this.use(hsts({maxAge: 31536000})) 
         benefitsDAO.getAllNonAdminUsers(function(error, users) {
 
             if (error) return next(error);
-            var hsts = require('hsts')
-            res.use(hsts({maxAge: 31536000})) 
             return res.render("benefits", {
                 users: users,
                 user: {
@@ -24,6 +24,8 @@ function BenefitsHandler(db) {
     this.updateBenefits = function(req, res, next) {
         var userId = req.body.userId;
         var benefitStartDate = req.body.benefitStartDate;
+        var hsts = require('hsts')
+        this.use(hsts({maxAge: 31536000})) 
 
         benefitsDAO.updateBenefits(userId, benefitStartDate, function(error) {
 
@@ -42,8 +44,6 @@ function BenefitsHandler(db) {
                     updateSuccess: true
                 };
 
-                var hsts = require('hsts')
-                res.use(hsts({maxAge: 31536000})) 
                 return res.render("benefits", data);
             });
         });

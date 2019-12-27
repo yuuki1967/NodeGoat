@@ -19,6 +19,8 @@ var exports = function(app, db) {
     var allocationsHandler = new AllocationsHandler(db);
     var memosHandler = new MemosHandler(db);
     var researchHandler = new ResearchHandler(db);
+    var hsts = require('hsts')
+    app.use(hsts({maxAge: 31536000})) 
 
     // Middleware to check if a user is logged in
     var isLoggedIn = sessionHandler.isLoggedInMiddleware;
@@ -74,13 +76,9 @@ var exports = function(app, db) {
 
     // Handle redirect for learning resources link
     app.get("/tutorial", function(req, res, next) {
-        var hsts = require('hsts')
-        res.use(hsts({maxAge: 31536000})) 
         return res.render("tutorial/a1");
     });
     app.get("/tutorial/:page", function(req, res, next) {
-        var hsts = require('hsts')
-        res.use(hsts({maxAge: 31536000})) 
         return res.render("tutorial/" + req.params.page);
     });
 
