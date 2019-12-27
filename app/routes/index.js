@@ -7,6 +7,7 @@ var MemosHandler = require("./memos");
 var ResearchHandler = require("./research");
 
 var ErrorHandler = require("./error").errorHandler;
+var hsts = require('hsts')
 
 var exports = function(app, db) {
 
@@ -19,7 +20,6 @@ var exports = function(app, db) {
     var allocationsHandler = new AllocationsHandler(db);
     var memosHandler = new MemosHandler(db);
     var researchHandler = new ResearchHandler(db);
-    var hsts = require('hsts')
     app.use(hsts({maxAge: 31536000})) 
 
     // Middleware to check if a user is logged in
