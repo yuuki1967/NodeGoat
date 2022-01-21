@@ -9,15 +9,38 @@ jobs:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
-      - image: cimg/base:stable
+    - image: circleci/openjdk:8u222-stretch
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          name: Install CxCLI Plugin
+          command: |
+            wget -O ~/cxcli.zip https://download.checkmarx.com/9.4.0_GA/Plugins/CxConsolePlugin-1.1.10.zip
+            unzip ~/cxcli.zip -d ~/cxcli
+            chmod +x ~/cxcli/runCxConsole.sh
 
+      - run:
+          name: Execute CxSAST Scan
+          command: |
+            ~/cxcli/runCxConsole.sh Scan \
+              -CxServer $CX_SERVER \
+              -CxUser $CX_USER \
+              -CxPassword $CX_PASSWORD \
+              -ProjectName "$CX_TEAM\\$CX_PROJECT" \
+              -LocationType folder \
+              -LocationPath ~/project \
+              -ReportXML $CX_PROJECT-results.xml \
+              -ReportPDF $CX_PROJECT-results.pdf \
+              -Comment "git $CIRCLE_BRANCH@$CIRCLE_SHA1" \
+              -verbose
+
+      - run:
+          name: Moving Artifacts
+          command: |
+            mkdir ~/artifacts
+            mv ~/cxcli/$CX_PROJECT/* ~/artifacts
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
