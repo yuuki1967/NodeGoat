@@ -39,7 +39,8 @@ jobs:
           name: Moving Artifacts
           command: |
             mkdir ~/artifacts
-            mv ~/cxcli/$CX_PROJECT/* ~/artifacts
+            mv ~/cxcli/Checkmarx/* ~/artifacts
+
       # Store the generated reports with the build logs in CircleCI
       - store_artifacts:
           path: ~/artifacts
