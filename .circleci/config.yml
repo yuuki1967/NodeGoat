@@ -35,12 +35,15 @@ jobs:
               -ReportPDF $CX_PROJECT-results.pdf \
               -Comment "git $CIRCLE_BRANCH@$CIRCLE_SHA1" \
               -verbose
-
       - run:
           name: Moving Artifacts
           command: |
             mkdir ~/artifacts
             mv ~/cxcli/$CX_PROJECT/* ~/artifacts
+      # Store the generated reports with the build logs in CircleCI
+      - store_artifacts:
+          path: ~/artifacts
+          destination: sast_results  
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
