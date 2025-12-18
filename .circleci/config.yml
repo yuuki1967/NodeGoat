@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: cimg/base:current
-    resource_class: yuuki1967/myubuntu2
+    resource_class: yuuki1967/myubuntu3
     steps:
       - run: echo "Hi I'm on a Container Runner!"
 workflows:
