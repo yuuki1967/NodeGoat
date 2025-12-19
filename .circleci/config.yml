@@ -17,7 +17,7 @@ jobs:
         circleci run release plan \
         --environment-name="rollback" \
         --component-name="rollback" \
-        --target-version="<some-version-name>"
+        --target-version="v0.0.1"
    # Your job here doing the actual deployment
    - run:
      name: Update a deploy to SUCCESS
