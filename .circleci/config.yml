@@ -6,22 +6,6 @@ jobs:
     resource_class: yuuki1967/myubuntu3
     steps:
       - run: echo "Hi I'm on a Container Runner!"
-      - run:
-       name: Plan a deploy
-       command: |
-         circleci run release plan \
-          --environment-name="development" \
-          --component-name="nodegoat" \
-          --target-version="<some-version-name>"
-     # Your job here doing the actual deployment
-     - run:
-      name: Update a deploy to SUCCESS
-      command: circleci run release update --status=SUCCESS 
-      when: on_success 
-    - run:
-      name: Update planned deploy to FAILED
-      command: circleci run release update --status=FAILED 
-      when: on_fail
 workflows:
   build-workflow:
     jobs:
