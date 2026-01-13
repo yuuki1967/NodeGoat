@@ -11,4 +11,4 @@ jobs:
     - name: checkout
       uses: actions/checkout@v6
 
-    - run: cat ./Readme.md
+    - run: cat ./README.md
