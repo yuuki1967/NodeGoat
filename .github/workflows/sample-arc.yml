@@ -8,3 +8,7 @@ jobs:
     runs-on: arc-runner-set
     steps:
     - run: echo "🎉 This job uses runner scale set runners!"
+    - name: checkout
+      uses: actions/checkout@v6
+
+    - run: cat Readme.md
